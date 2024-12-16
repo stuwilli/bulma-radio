@@ -1,6 +1,13 @@
+@use "../node_modules/bulma/sass/utilities/extends" as ex;
+@use "../node_modules/bulma/sass/utilities/derived-variables" as dv;
+@use "../node_modules/bulma/sass/utilities/initial-variables" as iv;
+@use "../node_modules/bulma/sass/utilities/controls" as c;
+@use "../node_modules/bulma/sass/utilities/mixins" as mixins;
+@use "./variables" as vars;
 .b-radio {
   &.radio {
-    @extend %unselectable;
+    //@extend %unselectable;
+    @include mixins.unselectable();
     outline: none;
     display: inline-flex;
     align-items: center;
@@ -25,27 +32,27 @@
         flex-shrink: 0;
         position: relative;
         cursor: pointer;
-        width: $radio-size;
-        height: $radio-size;
-        transition: background $speed-slow $easing;
+        width: vars.$radio-size;
+        height: vars.$radio-size;
+        transition: background vars.$speed-slow iv.$easing;
         border-radius: 50%;
-        border: 2px solid $grey;
+        border: 2px solid iv.$grey;
         &:before {
           content: "";
           display: flex;
           position: absolute;
           left: 50%;
-          margin-left: calc(-#{$radio-size} * 0.5);
+          margin-left: calc(-#{vars.$radio-size} * 0.5);
           bottom: 50%;
-          margin-bottom: calc(-#{$radio-size} * 0.5);
-          width: $radio-size;
-          height: $radio-size;
-          transition: transform $speed-slow $easing;
+          margin-bottom: calc(-#{vars.$radio-size} * 0.5);
+          width: vars.$radio-size;
+          height: vars.$radio-size;
+          transition: transform vars.$speed-slow iv.$easing;
           border-radius: 50%;
           transform: scale(0);
-          background-color: $radio-active-background-color;
+          background-color: vars.$radio-active-background-color;
         }
-        @each $name, $pair in $radio-colors {
+        @each $name, $pair in vars.$radio-colors {
           $color: nth($pair, 1);
           &.is-#{$name}:before {
             background: $color;
@@ -53,8 +60,8 @@
         }
       }
       &:checked + .check {
-        border-color: $radio-active-background-color;
-        @each $name, $pair in $radio-colors {
+        border-color: vars.$radio-active-background-color;
+        @each $name, $pair in vars.$radio-colors {
           $color: nth($pair, 1);
           &.is-#{$name} {
             border-color: $color;
@@ -66,11 +73,11 @@
       }
       &:focus {
         + .check {
-          box-shadow: 0 0 0.5em rgba($grey, 0.8);
+          box-shadow: 0 0 0.5em rgba(iv.$grey, 0.8);
         }
         &:checked + .check {
-          box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
-          @each $name, $pair in $radio-colors {
+          box-shadow: 0 0 0.5em rgba(vars.$radio-active-background-color, 0.8);
+          @each $name, $pair in vars.$radio-colors {
             $color: nth($pair, 1);
             &.is-#{$name} {
               box-shadow: 0 0 0.5em rgba($color, 0.8);
@@ -80,7 +87,7 @@
       }
     }
     .control-label {
-      padding-left: $control-padding-horizontal;
+      padding-left: c.$control-padding-horizontal;
     }
     &.button {
       display: flex;
@@ -94,8 +101,8 @@
     }
     &:hover {
       input[type=radio]:not(:disabled) + .check {
-        border-color: $radio-active-background-color;
-        @each $name, $pair in $radio-colors {
+        border-color: vars.$radio-active-background-color;
+        @each $name, $pair in vars.$radio-colors {
           $color: nth($pair, 1);
           &.is-#{$name} {
             border-color: $color;
@@ -104,13 +111,13 @@
       }
     }
     &.is-small {
-      @include control-small;
+      @include c.control-small;
     }
     &.is-medium{
-      @include control-medium;
+      @include c.control-medium;
     }
     &.is-large {
-      @include control-large;
+      @include c.control-large;
     }
   }
 }
